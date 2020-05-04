@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { nr: 0}
+    }
+
+    async addToNr() {
+        let { nr } = this.state
+        nr += 1;
+        this.setState({ nr });
+        const value = await axios.get('/api/leads')
+        console.log(value.data);
+    }
+
     render() {
         return (
             <nav className="navbar navbar-expand-sm navbar-light bg-light">
@@ -11,7 +25,7 @@ class Header extends Component {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <a className="navbar-brand" href="#">Lead manager</a>
+                    <a className="navbar-brand" href="#" onClick={() => this.addToNr()}>Lead aaa {this.state.nr}</a>
                     <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
 
                     </ul>
